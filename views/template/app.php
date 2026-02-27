@@ -18,14 +18,18 @@
                 <li><a href="/meus-livros" class="hover:underline">Meus livros</a></li>
             </ul>
             <ul>
-                <li><a href="/login">Fazer login</a></li>
+                <?php if (isset($_SESSION['auth'])): ?>
+                    <li><a href="/logout" class="hover:underline">oi, <?= $_SESSION['auth']['nome']  ?></a></li>
+                <?php else: ?>
+                    <li><a href="/login" class="hover:underline">Fazer login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
 
     <!-- Main -->
     <main class="mx-auto max-w-screen-lg space-y-6">
-            <?php require "views/{$view}.view.php"; ?>
+        <?php require "views/{$view}.view.php"; ?>
     </main>
 
     <!-- Footer -->
