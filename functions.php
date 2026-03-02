@@ -26,3 +26,7 @@
         view(404);
         die();
     }
+
+    function flash (){
+        return new Flash;
+    }

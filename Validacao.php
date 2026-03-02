@@ -68,8 +68,13 @@ class Validacao
         }
     }
 
-    public function naoPassou(){
-        $_SESSION['validacoes'] = $this->validacoes;
+    public function naoPassou($nomeCustomizado = null){
+        $chave = 'validacoes';
+        if($nomeCustomizado){
+            $chave .= '_'. $nomeCustomizado;
+        }
+        flash()->push($chave, $this->validacoes);
+        //$_SESSION['validacoes'] = $this->validacoes;
         return sizeof($this->validacoes)  > 0;
     }
 }

@@ -10,7 +10,7 @@
             'senha' => ['required', 'min:8', 'max:30', 'strong']
         ], $_POST);
 
-        if($validacao->naoPassou()){
+        if($validacao->naoPassou('registrar')){
             header('location: /login');
             exit();
         }
@@ -24,7 +24,8 @@
         ]
         );
 
-        header('location: /login?mensagem=Registrado com sucesso');
+        flash()->push('mensagem', 'Registrado com sucesso!👍');
+        header('location: /login');
         exit();
     }
 
