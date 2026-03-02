@@ -8,12 +8,13 @@
 
         $usuario = $database->query(
             query: "select * from usuarios where email = :email and senha = :senha",
+            class: Usuario::class,
             params: compact('email', 'senha'))
             ->fetch();
 
         if($usuario){
             $_SESSION['auth'] = $usuario;
-            $_SESSION['mensage'] = 'seja bem vindo, ' . $usuario['nome'].'!';
+            $_SESSION['mensage'] = 'seja bem vindo, ' . $usuario->nome.'!';
             header('location: /');
             exit();
         }
