@@ -29,6 +29,21 @@ class Validacao
         return $validacao;
     }
 
+    private function unique($table, $campo, $valor){
+        if(strlen($table) == 0){
+            return ;
+        }
+        $db = new Database(config('database'));
+
+        $resultado = $db->query("SELECT * FROM $table WHERE $campo = :valor",
+        params:['valor' => $valor]
+        )->fetch();
+
+        if($resultado){
+            $this->validacoes[] = "O $campo já está sendo usado.";
+        }
+    }
+
     private function required($campo, $valor)
     {
         if (strlen($valor) == 0) {
