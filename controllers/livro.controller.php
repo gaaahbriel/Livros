@@ -1,9 +1,9 @@
 <?php
-    
-    $livro = $database->query(
+
+$livro = $database->query(
     query: "SELECT * FROM livros where id = :id",
     class: Livro::class,
     params: ["id" => $_GET['id']]
-    )->fetch();
+)->fetch();
 
-    view('livro', compact('livro'));
+view('livro', compact('livro'));

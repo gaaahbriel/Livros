@@ -1,5 +1,5 @@
 <?php
 
-    session_destroy();
-    header('location: /login');
-    exit();
+session_destroy();
+header('location: /login');
+exit();

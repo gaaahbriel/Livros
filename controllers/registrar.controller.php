@@ -1,33 +1,33 @@
 <?php
 
-    require 'Validacao.php';
+require 'Validacao.php';
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $validacao = Validacao::validar([
-            'nome' => ['required'],
-            'email' => ['required', 'email', 'confirmed', 'unique:usuarios'],
-            'senha' => ['required', 'min:8', 'max:30', 'strong']
-        ], $_POST);
+    $validacao = Validacao::validar([
+        'nome' => ['required'],
+        'email' => ['required', 'email', 'confirmed', 'unique:usuarios'],
+        'senha' => ['required', 'min:8', 'max:30', 'strong']
+    ], $_POST);
 
-        if($validacao->naoPassou('registrar')){
-            header('location: /login');
-            exit();
-        }
-
-        $database->query(
-        query: "INSERT INTO usuarios (nome, email, senha) values (:nome, :email, :senha)",
-        params: [
-        'nome' => $_POST['nome'],
-        'email' => $_POST['email'],
-        'senha' => $_POST['senha']
-        ]
-        );
-
-        flash()->push('mensagem', 'Registrado com sucesso!👍');
+    if ($validacao->naoPassou('registrar')) {
         header('location: /login');
         exit();
     }
 
+    $database->query(
+        query: "INSERT INTO usuarios (nome, email, senha) values (:nome, :email, :senha)",
+        params: [
+            'nome' => $_POST['nome'],
+            'email' => $_POST['email'],
+            'senha' => $_POST['senha']
+        ]
+    );
+
+    flash()->push('mensagem', 'Registrado com sucesso!👍');
     header('location: /login');
     exit();
+}
+
+header('location: /login');
+exit();
