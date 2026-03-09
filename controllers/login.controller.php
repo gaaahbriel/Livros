@@ -19,8 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         query: "SELECT * FROM usuarios WHERE email = :email",
         class: Usuario::class,
         params: compact('email')
-    )
-        ->fetch();
+    )->fetch();
 
     if ($usuario) {
         if(!password_verify($_POST['senha'], $usuario->senha)){
