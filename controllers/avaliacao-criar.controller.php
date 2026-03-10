@@ -1,20 +1,34 @@
 <?php
 
-if($_SERVER['REQUEST_METHOD'] != 'POST'){
+require 'Validacao.php';
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header('location: /');
     exit();
 }
 
-$usuario_id = $_SESSION['auth'];
+$usuario_id = auth()->id;
+$livro_id = $_POST['livro_id'];
+$avaliacao = $_POST['avaliacao'];
+$nota = $_POST['nota'];
 
+$validacao = Validacao::validar([
+    'avaliacao' => ['required'],
+    'nota' => ['required']
+], $_POST);
+
+if ($validacao->naoPassou()) {
+    header('location: /livro?id=' . $livro_id);
+    exit();
+}
 
 $database->query(
     "INSERT INTO avaliacoes (usuario_id, livro_id, avaliacao, nota)
     VALUES (:usuario_id, :livro_id, :avaliacao, :nota)",
-    params: compact('usuario_id', 'livro_id', 'avalicao', 'nota')
-    
-    );
+    params: compact('usuario_id', 'livro_id', 'avaliacao', 'nota')
 
-    flash()->push('mensagem', 'avaliação criada com sucesso');
-    header('location: /livro?id='.$livro_id);
-    exit();
+);
+
+flash()->push('mensagem', 'avaliação criada com sucesso');
+header('location: /livro?id=' . $livro_id);
+exit();
