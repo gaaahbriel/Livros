@@ -1,22 +1,22 @@
-<h1>Meus livros</h1>
-
-<!--<div class="p-2 rounded border-stone-800 border-2 bg-stone-900">
-    <div class="flex">
-        <?php foreach ($livros as $livro): ?>
-            <div class="space-y-1">
-                <a class="font-semibold hover:underline"><?= $livro->titulo ?></a>
-                <div class="text-cs italic"><?= $livro->autor ?></div>
-            </div>
-    </div>
-
-    <div class="text-sm mt-2">
-        <?= $livro->descricao ?>
-    </div>
-<?php endforeach; ?>
-</div> -->
+<h1 class="mt-6 font-bold text-lg">Meus livros</h1>
 
 <div class="grid grid-cols-4 gap-4">
-    <div class="col-span-3 gap-4 grid">
+    <div class="col-span-3 flex flex-col gap-4">
+        <?php foreach ($livros as $livro): ?>
+            <div class="p-2 rounded border-stone-800 border-2 bg-stone-900">
+                <div class="flex">
+                    <div class="w-1/3">Imagem</div>
+                    <div class="space-y-1">
+                        <a href="/livro?id=<?= $livro->id ?>" class="font-semibold hover:underline"><?= $livro->titulo ?></a>
+                        <div class="text-cs italic"><?= $livro->autor ?></div>
+                    </div>
+                </div>
+
+                <div class="text-sm mt-2">
+                    <?= $livro->descricao ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
     <div>
         <div class="border border-stone-700 rounded">
