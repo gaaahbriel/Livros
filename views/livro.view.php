@@ -1,33 +1,4 @@
-    <!-- Main -->
-    <?php
-    $sumNotas = array_reduce($avaliacoes, function ($carry, $a) {
-        return ($carry ?? 0) + $a->nota;
-    }) ?? 0;
-
-    $qtdAvaliacoes = count($avaliacoes);
-
-    if ($qtdAvaliacoes > 0) {
-        $media = round($sumNotas / $qtdAvaliacoes);
-    } else {
-        $media = 0;
-    }
-
-    $notaFinal = str_repeat('⭐', $media);
-    ?>
-    <div class="p-2 rounded border-stone-800 border-2 bg-stone-900">
-        <div class="flex">
-            <div class="w-1/3"></div>
-            <div class="space-y-1">
-                <a href="/livro?id=<?= $livro->id ?>" class="font-semibold hover:underline"><?= $livro->titulo ?></a>
-                <div class="text-cs italic"><?= $livro->autor ?></div>
-                <div class="text-cs italic"> <?= $notaFinal ?> (<?= count($avaliacoes) ?> Avaliações)</div>
-            </div>
-        </div>
-
-        <div class="text-sm mt-2">
-            <?= $livro->descricao ?>
-        </div>
-    </div>
+    <?php require 'partials/_livro.php'; ?>
 
     <h2>Avaliações</h2>
 
@@ -36,7 +7,7 @@
             <?php foreach ($avaliacoes as $avaliacao): ?>
                 <div class="border border-stone-700 rounded">
                     <div>
-                    <?= $avaliacao->nome ?>
+                        <?= $avaliacao->nome ?>
                     </div>
                     <?= $avaliacao->avaliacao ?>
                     <?php $nota = str_repeat("⭐", $avaliacao->nota) ?>

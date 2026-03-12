@@ -1,7 +1,18 @@
 <?php
 
 $livro = $database->query(
-    query: "SELECT * FROM livros WHERE id = :id",
+    query: "SELECT
+        l.id, l.titulo, l.autor, l.descricao, l.ano_de_lancamento,
+        round(sum(a.nota) / 5.0) as nota_avaliacao, count(a.id) as count_avaliacoes
+    FROM 
+        livros l
+    LEFT JOIN 
+        avaliacoes a on a.livro_id = l.id
+    WHERE 
+        l.id = :id
+    GROUP BY 
+        l.id, l.titulo, l.autor, l.descricao, l.ano_de_lancamento
+    ",
     class: Livro::class,
     params: ["id" => $_GET['id']]
 )->fetch();
