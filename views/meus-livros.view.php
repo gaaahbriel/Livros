@@ -13,7 +13,11 @@
                 <?php if ($validacoes = flash()->get('validacoes')): ?>
                     <div class="border-red-800 bg-red-900 text-red-400 px-4 py-1 rounded-md border-2">
                         <ul>
-                            <li>dê uma olhada nos erros abaixo</li>
+                            <?php if (count($validacoes) > 1): ?>
+                                <li>Problemas ao cadastrar livro:</li>
+                            <?php else: ?>
+                                <li>Problema ao cadastrar livro:</li>
+                            <?php endif; ?>
                             <?php foreach ($validacoes as $validacao): ?>
                                 <li><?= $validacao ?></li>
                             <?php endforeach; ?>

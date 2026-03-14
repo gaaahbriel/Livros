@@ -5,7 +5,11 @@
             <?php if ($validacoes = flash()->get('validacoes_login')): ?>
                 <div class="border-red-800 bg-red-900 text-red-400 px-4 py-1 rounded-md border-2">
                     <ul>
-                        <li>dê uma olhada nos erros abaixo</li>
+                        <?php if (count($validacoes) > 1): ?>
+                            <li>Problemas ao realizar login:</li>
+                        <?php else: ?>
+                            <li>Problema ao realizar login:</li>
+                        <?php endif; ?>
                         <?php foreach ($validacoes as $validacao): ?>
                             <li><?= $validacao ?></li>
                         <?php endforeach; ?>
@@ -38,7 +42,11 @@
             <?php if ($validacoes = flash()->get('validacoes_registrar')): ?>
                 <div class="border-red-800 bg-red-900 text-red-400 px-4 py-1 rounded-md border-2">
                     <ul>
-                        <li>dê uma olhada nos erros abaixo</li>
+                        <?php if (count($validacoes) > 1): ?>
+                            <li>Problemas ao realizar Registro:</li>
+                        <?php else: ?>
+                            <li>Problema ao realizar Rewgistro:</li>
+                        <?php endif; ?>
                         <?php foreach ($validacoes as $validacao): ?>
                             <li><?= $validacao ?></li>
                         <?php endforeach; ?>
